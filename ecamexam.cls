@@ -27,7 +27,7 @@
 \RequirePackage{pgfplots}
 \RequirePackage{eso-pic}
 \RequirePackage{adjustbox}
-
+\RequirePackage{etoolbox}
 \RequirePackage{soul}
 
 \RequirePackage{enumitem}
@@ -78,8 +78,10 @@
 \renewcommand{\choicelabel}{[\thechoice]}
 \renewcommand{\questionlabel}{\color{blue}\thequestion)}
 \renewcommand{\partlabel}{\thepartno)}
-\newcommand{\exercice}[1]{\noindent\vrule width 3pt~~\colorbox{Lavender}{\parbox{\linewidth-.5cm}{\Large #1}}\vspace{1em}}
 
+\newcounter{exercize}
+\newcommand{\noexercize}{\stepcounter{exercize}\theexercize}
+\newcommand{\exercice}[1]{\noindent\vrule width 3pt~~\colorbox{Lavender}{\parbox{\linewidth-.5cm}{\Large Exercice \noexercize:  #1}}\vspace{1em}}
 %
 
 \newcommand*{\@intro}{}
@@ -93,16 +95,17 @@
 }
 
 % Create specific instructions
+
+\newcommand{\tabitem}{~~\llap{$\blacksquare$}~~}
 \renewcommand{\labelitemi}{$\blacksquare$}
-\newcommand*{\@tableauconsigne}{}
-\newcommand*{\tableauconsigne}[1]{%
-	\renewcommand*{\@tableauconsigne}{%
-		\begin{itemize}
-			\item #1\checknextarg
-		}
-}
-\newcommand*{\checknextarg}{\@ifnextchar\bgroup{\addnextchar}{\end{itemize}}}
-\newcommand*{\addnextchar}[1]{ \item #1 \@ifnextchar\bgroup{\addnextchar}{\end{itemize}}}
+
+\newcommand*\consignes{}
+\newcommand*\consigne[1]
+{\ifx\consignes\empty
+	\def\consignes{\tabitem #1 & \\}%
+	\else
+	\expandafter\def\expandafter\consignes\expandafter{\consignes \tabitem#1 & \\}%
+	\fi}
 
 
 \newcommand{\makecover}{%
@@ -122,7 +125,8 @@
 			\hline
 			\hl{Consignes spécifiques:} &\\
 			
-			\@tableauconsigne &\\
+			%\@tableauconsigne &\\
+			\consignes
 			\hline
 			\makebox[.8\linewidth]{\hl{Nom:}\enspace\hrulefill} & \makebox[.8\linewidth]{\hl{Prénom:}\enspace\hrulefill}
 		\end{tabularx}
