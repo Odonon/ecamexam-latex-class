@@ -1,0 +1,1 @@
+# ecamexam-latex-class
