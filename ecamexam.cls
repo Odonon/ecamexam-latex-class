@@ -2,9 +2,24 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ecamexam}[2023/01/14 Template DS ECAM]
 
+\DeclareOption{french}{%
+	\def\uetext{\mbox{UE:}}
+	\def\consignetext{\mbox{Consignes spécifiques:}}
+	\def\dureetext{\mbox{Durée:}}
+	\def\nametext{\mbox{Nom:}}
+	\def\firstnametext{\mbox{Prénom:}}
+}
+\DeclareOption{english}{%
+	\def\uetext{\mbox{UE:}}
+	\def\consignetext{\mbox{Specific instructions:}}
+	\def\dureetext{\mbox{Duration:}}
+	\def\nametext{\mbox{Name:}}
+	\def\firstnametext{\mbox{First name:}}
+}
 \DeclareOption*{%
 	\PassOptionsToClass{\CurrentOption}{exam}
 }
+
 \ProcessOptions\relax
 
 \LoadClass[11pt,addpoints]{exam}
@@ -16,9 +31,8 @@
 	\renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{graphicx}
 \RequirePackage{amssymb}
-\RequirePackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
-\RequirePackage{polyglossia}
-	\setdefaultlanguage{french}
+\RequirePackage[top=1cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\RequirePackage{babel}
 \RequirePackage{adjustbox}
 \RequirePackage{pdfpages}
 \RequirePackage{tabularx}
@@ -29,8 +43,8 @@
 \RequirePackage{adjustbox}
 \RequirePackage{etoolbox}
 \RequirePackage{soul}
-
 \RequirePackage{enumitem}
+	\setlist{noitemsep}
 \RequirePackage{booktabs}
 
 
@@ -63,16 +77,15 @@
 	\renewcommand*{\@promo}{#1}%
 }
 \newcommand{\@annee}{}
-\newcommand*{\annee}[1]{%
+\newcommand*{\anneediplome}[1]{%
 	\renewcommand*{\@annee}{#1}%
 }
 
 % Typeset the headers and footers
 \pagestyle{headandfoot}
-\coverheader{}{}{\@dateDS}
 \headrule
 \header{\footnotesize \@sujetDS}{}{}
-\footer{\oddeven{}{Page \thepage\ sur \numpages}}{}{\oddeven{Page \thepage\ sur \numpages}{}}
+\@ifclasswith{ecamexam}{french}{\footer{\oddeven{Page \thepage\ sur \numpages}{}}{}{\oddeven{}{Page \thepage\ sur \numpages}}}{\footer{\oddeven{Page \thepage\ on \numpages}}{}{}{\oddeven{}{Page \thepage\ on \numpages}}}
 
 % Rename the different labels to match the template
 \renewcommand{\choicelabel}{[\thechoice]}
@@ -89,46 +102,59 @@
 	\renewcommand*{\@intro}{#1}
 }
 \newcommand{\makeintro}{%
+	\ifx\@intro\empty
+	\else
 	\fbox{\parbox{17cm}{
 		\@intro	
-	}}
+	}}\fi
 }
 
 % Create specific instructions
 
-\newcommand{\tabitem}{~~\llap{$\blacksquare$}~~}
+\newcommand{\tabitem}{\hspace{1.5cm}~~\llap{$\blacksquare$}~~}
 \renewcommand{\labelitemi}{$\blacksquare$}
+
+%\newcommand*\consignes{}
+%\newcommand*\consigne[1]
+%{\ifx\consignes\empty
+%	\def\consignes{\tabitem #1 & \\}%
+%	\else
+%	\expandafter\def\expandafter\consignes\expandafter{\consignes \tabitem#1 & \\}%
+%	\fi}
 
 \newcommand*\consignes{}
 \newcommand*\consigne[1]
 {\ifx\consignes\empty
-	\def\consignes{\tabitem #1 & \\}%
+	\def\consignes{\item #1}%
 	\else
-	\expandafter\def\expandafter\consignes\expandafter{\consignes \tabitem#1 & \\}%
+	\expandafter\def\expandafter\consignes\expandafter{\consignes \item #1}%
 	\fi}
 
-
+\renewcommand{\arraystretch}{0.1}
 \newcommand{\makecover}{%
 	\begin{coverpages}
-		\begin{tabularx}{\linewidth}{p{6cm}p{12cm}}
-			\adjincludegraphics[width=4cm,valign=c]{ECAM-LaSalle.png} & \Huge\color{bleuecam} \@sujetDS
+		\begin{tabularx}{\linewidth}{p{6cm}p{9cm}r}
+			& & \@dateDS \\
+			\adjincludegraphics[width=4cm,valign=c]{ECAM-LaSalle.png} & \Huge\color{bleuecam} \textbf{\@sujetDS} & \\
 		\end{tabularx}
 		
 		\renewcommand{\arraystretch}{2}
 		\sethlcolor{Lavender}
-%		\renewcommand{\labelitemi}{$\blacksquare$}
-		\begin{tabularx}{\linewidth}{p{0.5\linewidth}p{.5\linewidth}}
+		\renewcommand{\labelitemi}{$\blacksquare$}
+		\vspace{-1.25em} %to look exactly like the template provided by ECAM
+		
+		\begin{tabularx}{\linewidth}{p{0.45\linewidth}>{\raggedleft\arraybackslash}p{.5\linewidth}}
 			\hline
-			\hl{UE:} \@UE & \hl{Durée:} \@duree \\
-			\textbf{Promotion:} \@promo & \\
-			\textbf{Année:} \@annee & \\
+			\hl{\uetext} \@UE & \@promo/\@annee\\
+			 & \hl{\dureetext} \@duree\\
 			\hline
-			\hl{Consignes spécifiques:} &\\
+			\hl{\consignetext}
 			
-			%\@tableauconsigne &\\
-			\consignes
+			\begin{itemize}
+				\consignes 
+			\end{itemize} &\\
 			\hline
-			\makebox[.8\linewidth]{\hl{Nom:}\enspace\hrulefill} & \makebox[.8\linewidth]{\hl{Prénom:}\enspace\hrulefill}
+			\makebox[.8\linewidth]{\hl{\nametext}\enspace\hrulefill} & \makebox[.8\linewidth]{\hl{\firstnametext}\enspace\hrulefill}
 		\end{tabularx}
 	
 	\vspace{4em}

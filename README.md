@@ -4,11 +4,11 @@ This repository aims to unify the template for exams subjects for LaTeX users at
 
 ## The ecamexam.cls file
 
-The `ecamexam` class file is derived from the `exam` class available on CTAN. Therefore it uses the environnements defined in this parent class for typesetting questions.
+The `ecamexam` class file is derived from the `exam` class available on CTAN. Therefore it uses the environnements defined in this parent class for typesetting questions. The only options specific to `ecamexam` are ``\documentclass[french]{ecamexam}`` or same with `english`. It switches the titles of the different parts as well as the numbering for each pages an typos (hyphenation etc.).
 
 The `ecamexam.cls` file is the latex class file and therefore is the only file that needs to be modify. The files `template.tex` and `template_test_class.tex` should not be modified as they are Minimum Working Examples (MWE) and served as test files for the modification done in the class file.
 
-## Macro implemented (2023/02/05)
+## Macro implemented (2023/02/14)
 
 ### The coverpage
 For the coverpage several macros have been implemented:
@@ -16,8 +16,8 @@ For the coverpage several macros have been implemented:
 ```\UE{<name of the UE>}
 \duree{<duration of the exam>}
 \dateDS{<date of the exam>}
-\promo{<year of graduation>}
-\annee{<year of the exam>}
+\promo{<name of the promo>}
+\anneediplome{<year of graduation>}
 \sujetDS{<title of the exam>}
 \consigne{<first instruction to be shown>}
 \consigne{<second instruction to be shown>}
@@ -39,5 +39,6 @@ The `exercice` macro create the title of an exercize and automatically increment
 - [x] Automatiser le premier bandeau
 - [x] Automatiser la mise en page des consignes
 - [ ] Ajouter la possibilité de mettre les consignes sur deux colonnes
-- [ ] Créer une alternative automatique en anglais
+- [ ] Réparer l'affichage de longues consignes
+- [X] Créer une alternative automatique en anglais
 - [ ] Uploader la class sur CTAN
