@@ -27,7 +27,7 @@
 \RequirePackage[svgnames]{xcolor}
 	\definecolor{bleuecam}{HTML}{2F2F75} % bleu ECAM
 \RequirePackage{fontspec}
-	\setmainfont{Arial}
+	\setmainfont{Arial}[Path=fonts/]
 	\renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{graphicx}
 \RequirePackage{amssymb}
@@ -135,7 +135,7 @@
 	\begin{coverpages}
 		\begin{tabularx}{\linewidth}{p{6cm}p{9cm}r}
 			& & \@dateDS \\
-			\adjincludegraphics[width=4cm,valign=c]{ECAM-LaSalle.png} & \Huge\color{bleuecam} \textbf{\@sujetDS} & \\
+			\adjincludegraphics[width=4cm,valign=c]{logos/ECAM-LaSalle.png} & \Huge\color{bleuecam} \textbf{\@sujetDS} & \\
 		\end{tabularx}
 		
 		\renewcommand{\arraystretch}{2}
