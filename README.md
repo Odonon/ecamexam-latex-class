@@ -6,7 +6,7 @@ This repository aims to unify the template for exams subjects for LaTeX users at
 
 The `ecamexam` class file is derived from the `exam` class available on CTAN. Therefore it uses the environnements defined in this parent class for typesetting questions. The only options specific to `ecamexam` are ``\documentclass[french]{ecamexam}`` or same with `english`. It switches the titles of the different parts as well as the numbering for each pages an typos (hyphenation etc.).
 
-The `ecamexam.cls` file is the latex class file and therefore is the only file that needs to be modify. The files `template.tex` and `template_test_class.tex` should not be modified as they are Minimum Working Examples (MWE) and served as test files for the modification done in the class file.
+The `ecamexam.cls` file is the latex class file and therefore is the only file that needs to be modify. The file `template_test_class.tex` should not be modified as tit is the Minimum Working Example (MWE) and serves as test file for the modification done in the class file.
 
 ## Macro implemented (2023/02/14)
 
