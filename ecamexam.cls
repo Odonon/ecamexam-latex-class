@@ -95,6 +95,7 @@
 \newcounter{exercize}
 \newcommand{\noexercize}{\stepcounter{exercize}\theexercize}
 \newcommand{\exercice}[1]{\noindent\vrule width 3pt~~\colorbox{Lavender}{\parbox{\linewidth-.5cm}{\Large Exercice \noexercize:  #1}}\vspace{1em}}
+\newcommand{\exercicebonus}{\noindent\vrule width 3pt~~\colorbox{Lavender}{\parbox{\linewidth-.5cm}{\Large BONUS}}\vspace{1em}}
 %
 
 \newcommand{\@intro}{}
