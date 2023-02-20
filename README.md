@@ -43,4 +43,4 @@ The `exercicebonus` macro creates an unnumbered exercize named "BONUS":
 
 - [ ] Ajouter la possibilité de mettre les consignes sur deux colonnes
 - [ ] Réparer l'affichage de longues consignes
-- [~] Uploader la class sur CTAN
+- [ ] Uploader la class sur CTAN (in progress)
