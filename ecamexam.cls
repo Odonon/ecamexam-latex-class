@@ -31,7 +31,7 @@
 	\renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{graphicx}
 \RequirePackage{amssymb}
-\RequirePackage[top=1cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\RequirePackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
 \RequirePackage{babel}
 \RequirePackage{adjustbox}
 \RequirePackage{pdfpages}
@@ -97,15 +97,15 @@
 \newcommand{\exercice}[1]{\noindent\vrule width 3pt~~\colorbox{Lavender}{\parbox{\linewidth-.5cm}{\Large Exercice \noexercize:  #1}}\vspace{1em}}
 %
 
-\newcommand*{\@intro}{}
-\newcommand*{\intro}[1]{%
+\newcommand{\@intro}{}
+\newcommand{\intro}[1]{%
 	\renewcommand*{\@intro}{#1}
 }
 \newcommand{\makeintro}{%
 	\ifx\@intro\empty
 	\else
 	\fbox{\parbox{17cm}{
-		\@intro	
+		{\@intro}	
 	}}\fi
 }
 
@@ -132,6 +132,7 @@
 
 \renewcommand{\arraystretch}{0.1}
 \newcommand{\makecover}{%
+	\newgeometry{top=1cm,bottom=2cm,left=2cm,right=2cm}
 	\begin{coverpages}
 		\begin{tabularx}{\linewidth}{p{6cm}p{9cm}r}
 			& & \@dateDS \\
@@ -161,7 +162,7 @@
 	\makeintro
 	
 	\end{coverpages}
-		
+	\restoregeometry
 }
 
 
