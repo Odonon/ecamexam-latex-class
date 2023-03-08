@@ -1,3 +1,5 @@
+**This repo is not maintained on Github anymore but on the *inhouse* git at ECAM LaSalle. I may update this repo later down the line.**
+---
 # ECAMexam latex class for unified exams subjects
 
 This repository aims to unify the template for exams subjects for LaTeX users at ECAM LaSalle. It follows the template given as .doc for MS-Word users and therefore may be subject to change in the near future.
